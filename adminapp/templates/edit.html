@@ -1,0 +1,143 @@
+{% extends 'admindex.html' %}
+{% block content %}
+{% load static %}
+{% block nav %}
+<!-- Sidebar Start -->
+<div class="sidebar pe-4 pb-3">
+    <nav class="navbar bg-secondary navbar-dark">
+        <a href="index.html" class="navbar-brand mx-4 mb-3">
+            <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+        </a>
+        <div class="d-flex align-items-center ms-4 mb-4">
+            <div class="position-relative">
+                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+            </div>
+            <div class="ms-3">
+                <h6 class="mb-0">Jhon Doe</h6>
+                <span>Admin</span>
+            </div>
+        </div>
+        <div class="navbar-nav w-100">
+            <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            <div class="nav-item dropdown">
+                <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="button.html" class="dropdown-item">Buttons</a>
+                    <a href="typography.html" class="dropdown-item">Typography</a>
+                    <a href="element.html" class="dropdown-item">Other Elements</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+ <div class="sidebar pe-4 pb-3">
+    <nav class="navbar bg-secondary navbar-dark">
+        <a href="{% url 'admindex' %}" class="navbar-brand mx-4 mb-3">
+            <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+        </a>
+        <div class="d-flex align-items-center ms-4 mb-4">
+            <div class="position-relative">
+                <img class="rounded-circle" src="{% static 'admin/img/user.jpg' %}" alt="" style="width: 40px; height: 40px;">
+                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+            </div>
+            <div class="ms-3">
+                <h6 class="mb-0">John Doe</h6>
+                <span>Admin</span>
+            </div>
+        </div>
+        
+        <div class="navbar-nav w-100">
+            <a href="{% url 'admindex' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+           <a href="{% url 'message' %}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Message</a>
+           <a href="{% url 'u_payment' %}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Payment</a>
+           <div class="nav-item dropdown">
+               <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Forms</a>
+               <div class="dropdown-menu bg-transparent border-0">
+                <a href="{% url 'plan' %}" class="dropdown-item">Plan</a>
+                <a href="{% url 'category_form' %}" class="dropdown-item">Add Category</a>
+                   <a href="{% url 'cast' %}" class="dropdown-item">Add Cast</a>
+                   <a href="{% url 'movies_form' %}" class="dropdown-item active">Add Movies</a>
+                   <a href="{% url 'display' %}" class="dropdown-item">Movie Details</a>
+                   <a href="{% url 'notification' %}" class="dropdown-item">Add Notification</a>
+               </div>
+           </div>
+            <a href="{% url 'user' %}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Users</a>
+                
+            </div>
+    </nav>
+</div> 
+{% endblock %}
+            <!-- Form Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4" id="movies">
+                     <div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Movies</h6>
+                            {% for i in edit %}
+                            <form method="post" action="{% url 'update' i.id %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                                    <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="movie_name"
+                                    value="{{i.Movie_name}}">
+                                <label for="floatingInput">Movie_name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" name="movie_year"
+                                value="{{i.Movie_year}}">
+                            <label for="floatingInput">Movie_year</label>
+                        </div>
+                            <!-- <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="movie_cast"
+                                value="{{i.Movie_cast}}">
+                            <label for="floatingInput">Movie_cast</label>
+                        </div> -->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="movie_director"
+                            value="{{i.Movie_director}}">
+                        <label for="floatingInput">Movie_director</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="url" class="form-control" name="movie_trailer"
+                        value="{{i.Movie_trailer}}">
+                    <label for="floatingInput">Movie_trailer</label>
+                </div>
+                <select name="category" class="form-select mb-3" aria-label="Default select example">
+                    <option selected>Select Category</option>
+                    {% for i in category %}
+                    <option>{{i.Category}}</option>
+                        {% endfor %}
+                </select> 
+                            <div class="mb-2">
+                    <label for="formFileLg" class="form-label">Movie_image</label>
+                    <input type="file" class="form-control bg-dark" name="movie_image" required>
+                </div>
+                <div class="mb-2">
+                    <label for="formFileLg" class="form-label">Movie_file</label>
+                    <input type="file" class="form-control bg-dark" name="movie_file" required>
+                </div>
+                                         
+                    <div class="mb-4">
+                        <input type="submit" class="btn btn-primary" value="submit"></div> 
+
+                            <!-- <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here"
+                                    id="floatingTextarea" style="height: 150px;"></textarea>
+                                <label for="floatingTextarea">Comments</label>
+                            </div> -->
+                            </form>
+                            {% endfor %}
+                                                </div>
+                    </div>
+                                                
+                                       
+                </div>
+            
+    
+
+        <!-- Back to Top -->
+        <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> -->
+    
+    </div>
+    
+{% endblock %}

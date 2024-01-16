@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+	<!-- Font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CUbuntu:300,400,500,700" rel="stylesheet"> 
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="{% static 'watch/css/bootstrap-grid.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/bootstrap-reboot.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/jquery.mCustomScrollbar.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/nouislider.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/ionicons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/plyr.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/photoswipe.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/default-skin.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/main.css' %}">
+
+	<!-- Favicons -->
+	<link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
+	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="icon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="icon/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="icon/apple-touch-icon-144x144.png">
+
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="Dmitry Volkov">
+	<title>FlixGo – Online Movies, TV Shows & Cinema HTML Template</title>
+	<style>
+        .stars {
+            unicode-bidi: bidi-override;
+            direction: ltr;
+            text-align: center;
+        }
+        .star {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+        .star:hover,
+        .star.active {
+            color: orange;
+        }
+    </style>
+
+</head>
+<body class="body">
+	
+	<!-- header -->
+	<header class="header">
+		<div class="header__wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="header__content">
+							<!-- header logo -->
+							<!-- <a href="index.html" class="header__logo">
+								<img src="img/logo.svg" alt="">
+							</a> -->
+							<!-- end header logo -->
+
+							<!-- header nav -->
+							<ul class="header__nav">
+								<!-- dropdown -->
+								<li class="header__nav-item">
+									<a href="{% url 'index' %}" class="header__nav-link">Home</a>
+								</li>
+								<li class="header__nav-item">
+									<a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuCatalog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+									<ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuCatalog">
+										{% for i in category %}
+										<li><a href="{% url 'select' i.id %}">{{i.Category}}</a></li>
+										{% endfor %}
+									</ul>
+								</li>
+								<!-- end dropdown -->
+								
+								<!-- end dropdown -->
+
+								<li class="header__nav-item">
+									<a href="{% url 'trailer' %}" class="header__nav-link">Trailers</a>
+								</li>
+
+								<li class="header__nav-item">
+									<a href="{% url 'about' %}" class="header__nav-link">About</a>
+								</li>
+
+								<li class="header__nav-item">
+									<a href="{% url 'contact' %}" class="header__nav-link">Contact</a>
+								</li>
+							</ul>
+							<!-- end header nav -->
+
+							<!-- header auth -->
+							<div class="header__auth">
+								<button class="header__search-btn" type="button">
+									<i class="icon ion-ios-search"></i>
+								</button>
+
+								<a href="{% url 'logout' %}" class="header__sign-in">
+									<i class="icon ion-ios-log-in"></i>
+									<span>Logout</span>
+								</a>
+							</div>
+							<!-- end header auth -->
+
+							<!-- header menu btn -->
+							<button class="header__btn" type="button">
+								<span></span>
+								<span></span>
+								<span></span>
+							</button>
+							<!-- end header menu btn -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- header search -->
+		<form action="#" class="header__search">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="header__search-content">
+							<input type="text" placeholder="Search for a movie">
+
+							<button type="button">search</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- end header search -->
+	</header>
+	<!-- end header -->
+
+	<!-- details -->
+	<section class="section details" style="background-image: url({% static 'watch/bg.jpg' %});">
+		{% for i in movies_category %}
+		<!-- details background -->
+		<div class="details__bg" data-bg="img/home/home__bg.jpg"></div>
+		<!-- end details background -->
+
+		<!-- details content -->
+		<div class="container">
+			<div class="row">
+				<!-- title -->
+				<div class="col-12">
+					<h1 class="details__title">{{i.Movie_name}}</h1>
+				</div>
+				<!-- end title -->
+
+				<!-- content -->
+				<div class="col-12 col-xl-6">
+					<div class="card card--details">
+						<div class="row">
+							<!-- card cover -->
+							<div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-5">
+								<div class="card__cover">
+									<img src="{{i.Movie_image.url}}" alt="">
+								</div>
+							</div>
+							<!-- end card cover -->
+
+							<!-- card content -->
+							<div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-7">
+								<div class="card__content">
+									<!-- <div class="card__wrap">
+										<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+
+										<ul class="card__list">
+											<li>HD</li>
+											<li>16+</li>
+										</ul>
+									</div> -->
+									
+									<ul class="card__meta">
+										<br><br>
+										<li><span>Genre:</span> <a href="#">{{i.Category}}</a>
+										<li><span>Release year:</span>{{i.Movie_year}}</li>
+										<li><span>Director:</span>{{i.Movie_director}}</li>
+										<button type="button" onclick="playTrailer('{{i.Movie_trailer}}')" class="form__btn">Watch Trailer</button>
+
+										<script>
+										  function playTrailer(trailerUrl) {
+											// Define the size and features of the popup window
+											const popupWidth = 800;
+											const popupHeight = 600;
+											const leftPosition = (screen.width - popupWidth) / 2;
+											const topPosition = (screen.height - popupHeight) / 2;
+										
+											// Open the trailer in a popup window
+											window.open(trailerUrl, 'movieTrailer', `width=${popupWidth}, height=${popupHeight}, top=${topPosition}, left=${leftPosition}`);
+										  }
+										</script>
+									</ul>
+									
+
+									<div class="card__description card__description--details">
+										<!-- It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. -->
+								
+									</div>
+								</div>
+							</div>
+							<!-- end card content -->
+						</div>
+					</div>
+				</div>
+				<!-- end content -->
+
+				<!-- player -->
+				<div class="col-12 col-xl-6">
+					<video controls crossorigin playsinline poster="../../../cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
+						<!-- Video files -->
+						<source src="{{i.Movie_file.url}}" type="video/mp4" size="576">
+						<source src="{{i.Movie_file.url}}" type="video/mp4" size="720">
+						<source src="{{i.Movie_file.url}}" type="video/mp4" size="1080">
+						<source src="{{i.Movie_file.url}}" type="video/mp4" size="1440">
+
+						<!-- Caption files -->
+						<track kind="captions" label="English" srclang="en" src="{{i.Movie_file.url}}"
+						    default>
+						<track kind="captions" label="Français" srclang="fr" src="{{i.Movie_file.url}}">
+
+						<!-- Fallback for browsers that don't support the <video> element -->
+						<a href="{{i.Movie_file.url}}" download>Download</a>
+					</video>
+					<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/ycoY201RTRo?si=VJdScAeXGC1gkejR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+				</div>
+				<!-- end player -->
+
+				
+			</div>
+		</div>
+		
+		<!-- end details content -->
+	</section>
+	<!-- end details -->
+
+	<!-- content -->
+	<section class="content">
+		<div class="content__head">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- content title -->
+						<h2 class="content__title">Discover</h2>
+						<!-- end content title -->
+
+						<!-- content tabs nav -->
+						<ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Cast</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Comments</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Reviews</a>
+							</li>
+						</ul>
+						<!-- end content tabs nav -->
+
+						<!-- content mobile tabs nav -->
+						<div class="content__mobile-tabs" id="content__mobile-tabs">
+							<div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<input type="button" value="Comments">
+								<span></span>
+							</div>
+
+							<div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
+								<ul class="nav nav-tabs" role="tablist">
+									<li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Cast</a></li>
+
+									<li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Comments</a></li>
+
+									<li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Reviews</a></li>
+								</ul>
+							</div>
+						</div>
+						<!-- end content mobile tabs nav -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-8 col-xl-8">
+					<!-- content tabs -->
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+							<div class="row">
+								<!-- comments -->
+								<div class="col-12">
+									<div class="comments">
+										<ul class="comments__list">			
+											{% for i in comments %}
+											<li class="comments__item">
+												<div class="comments__autor">
+													<img class="comments__avatar" src="{% static 'watch/img/user.png' %}" alt="">
+													<span class="comments__name">{{i.username}}</span>
+													<span class="comments__time">{{i.date}}, {{i.time}}</span>
+												</div>
+												<p class="comments__text">{{i.add_comments}}</p>
+												<!-- <div class="comments__actions">
+													<div class="comments__rate">
+														<button type="button"><i class="icon ion-md-thumbs-up"></i>74</button>
+
+														<button type="button">13<i class="icon ion-md-thumbs-down"></i></button>
+													</div> 
+													
+													<button type="button"><i class="icon ion-ios-share-alt"></i>Reply</button>
+													<button type="button"><i class="icon ion-ios-quote"></i>Quote</button>
+												</div>-->
+											</li>
+											{% endfor %}
+										</ul>
+
+										<form action="{% url 'comments' i.id %}" class="form" method="post">
+											{% csrf_token %}
+											<textarea id="text" name="comments" class="form__textarea" placeholder="Add comment"></textarea>
+											<button type="submit" class="form__btn">Send</button>
+										</form>
+									</div>
+								</div>
+								<!-- end comments -->
+							</div>
+						</div>
+
+						<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
+							<div class="row">
+								<!-- reviews -->
+								<div class="col-12">
+									<div class="reviews">
+										<ul class="reviews__list">
+											{% for i in reviews %}
+
+											<li class="reviews__item">
+												<div class="reviews__autor">
+													<img class="reviews__avatar" src="{% static 'watch/img/user.png' %}" alt="">
+													<span class="reviews__name">{{i.user_name}}</span>
+													<span class="reviews__time">{{i.date}},{{i.time}}</span>
+
+													<span class="reviews__rating"><i class="icon ion-ios-star"></i>{{i.rating}}</span>
+												</div>
+												<p class="reviews__text">{{i.add_reviews}}</li>
+													{% endfor %}
+										
+										</ul>
+
+										<form action="{% url 'reviews' i.id %}" class="form" method="post">
+											{% csrf_token %}
+											
+											<textarea class="form__textarea" placeholder="Review" name="add_reviews"></textarea>
+											<div class="form__slider">
+												<!-- <input type="number" name="rate" min="1" max="10" step="0.1"> -->
+											<div class="form__slider-value" id="form__slider-value"></div>
+											</div>
+										
+													<div class="stars" >
+														<span class="star" data-value="1">&#9733;</span>
+														<span class="star" data-value="2">&#9733;</span>
+														<span class="star" data-value="3">&#9733;</span>
+														<span class="star" data-value="4">&#9733;</span>
+														<span class="star" data-value="5">&#9733;</span>
+													</div>
+													<input type="hidden" name="rate" id="rating-value">
+													<!-- <input type="submit" value="Submit"> -->
+											
+											<script>
+												document.addEventListener('DOMContentLoaded', function () {
+														const stars = document.querySelectorAll('.star');
+														const ratingValue = document.getElementById('rating-value');
+											
+														stars.forEach(star => {
+															star.addEventListener('click', function () {
+																const value = this.getAttribute('data-value');
+																ratingValue.value = value;
+																highlightStars(value);
+															});
+														});
+											
+														function highlightStars(value) {
+															stars.forEach(star => {
+																if (star.getAttribute('data-value') <= value) {
+																	star.classList.add('active');
+																} else {
+																	star.classList.remove('active');
+																}
+															});
+														}
+											
+														const initialRating = document.querySelector('.stars').getAttribute('data-rating');
+														highlightStars(initialRating);
+													});
+											   
+											</script>
+											
+											
+										
+											<button type="submit" class="form__btn">Send</button>
+										</form>
+										<script>
+											// JavaScript to update the hidden input field with the slider value
+											const slider = document.getElementById('slider__rating');
+											const rateInput = document.getElementById('rateInput');
+											
+											// Assuming the slider value ranges from 0 to 10
+											slider.addEventListener('input', function() {
+												rateInput.value = this.value;
+											});
+											</script>
+									</div>
+								</div>
+								<!-- end reviews -->
+							</div>
+						</div>
+
+						<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+							<!-- project gallery -->
+							<div class="gallery" itemscope>
+								<div class="row">
+									<ul class="comments__list">			
+									<!-- gallery item -->
+									{% for i in cast %}
+									<li class="comments__item">
+										<div class="comments__autor">
+											<img class="comments__avatar" src="{{i.cast_img.url}}" alt="">
+											<span class="comments__name">{{i.cast_name}}</span>
+										</div>
+										<br>
+										</li>
+<!-- <div class="card__cover">
+	<img src="{{i.cast_img.url}}" alt="">
+</div> -->
+									{% endfor %}
+						
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+					<!-- end content tabs -->
+				</div>
+
+				<!-- sidebar -->
+				<div class="col-12 col-lg-4 col-xl-4">
+					<div class="row">
+						<!-- section title -->
+						<div class="col-12">
+							<h2 class="section__title section__title--sidebar">You may also like...</h2>
+						</div>
+						<!-- end section title -->
+
+						<!-- card -->
+		{% for i in movies %}
+		{% if forloop.counter <= 4 %}
+						<div class="col-6 col-sm-4 col-lg-6">
+							<div class="card">
+								<div class="card__cover">
+									<img src="{{i.Movie_image.url}}" alt="">
+									<a href="{% url 'watch' i.id %}" class="card__play">
+										<i class="icon ion-ios-play"></i>
+									</a>
+								</div>
+								<div class="card__content">
+									<h3 class="card__title"><a href="{% url 'watch' i.id %}">{{i.Movie_name}}</a></h3>
+									<span class="card__category">
+										<a href="{% url 'watch' i.id %}">{{i.Category}}</a>
+										<!-- <a href="#">Triler</a> -->
+									</span>
+									<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+						{% endfor %}
+						<!-- end card -->
+
+						<!-- card -->
+						<!-- <div class="col-6 col-sm-4 col-lg-6">
+							<div class="card">
+								<div class="card__cover">
+									<img src="{% static 'watch/img/covers/cover2.jpg' %}" alt="">
+									<a href="#" class="card__play">
+										<i class="icon ion-ios-play"></i>
+									</a>
+								</div>
+								<div class="card__content">
+									<h3 class="card__title"><a href="#">Benched</a></h3>
+									<span class="card__category">
+										<a href="#">Comedy</a>
+									</span>
+									<span class="card__rate"><i class="icon ion-ios-star"></i>7.1</span>
+								</div>
+							</div>
+						</div> -->
+						<!-- end card -->
+
+				</div>
+				</div>
+				<!-- end sidebar -->
+			</div>
+		</div>
+		{% endfor %}
+	</section>
+	<!-- end content -->
+<!-- page title -->
+
+<!-- end page title -->
+
+
+	
+
+	<!-- Root element of PhotoSwipe. Must have class pswp. -->
+	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+		<!-- Background of PhotoSwipe. 
+		It's a separate element, as animating opacity is faster than rgba(). -->
+		<div class="pswp__bg"></div>
+
+		<!-- Slides wrapper with overflow:hidden. -->
+		<div class="pswp__scroll-wrap">
+
+			<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+			<!-- don't modify these 3 pswp__item elements, data is added later on. -->
+			<div class="pswp__container">
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+			</div>
+
+			<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+			<div class="pswp__ui pswp__ui--hidden">
+
+				<div class="pswp__top-bar">
+
+					<!--  Controls are self-explanatory. Order can be changed. -->
+
+					<div class="pswp__counter"></div>
+
+					<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+					<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+					<!-- Preloader -->
+					<div class="pswp__preloader">
+						<div class="pswp__preloader__icn">
+							<div class="pswp__preloader__cut">
+								<div class="pswp__preloader__donut"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+				<div class="pswp__caption">
+					<div class="pswp__caption__center"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- JS -->
+	<script src="{% static 'watch/js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'watch/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'watch/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'watch/js/jquery.mousewheel.min.js' %}"></script>
+	<script src="{% static 'watch/js/jquery.mCustomScrollbar.min.js' %}"></script>
+	<script src="{% static 'watch/js/wNumb.js' %}"></script>
+	<script src="{% static 'watch/js/nouislider.min.js' %}"></script>
+	<script src="{% static 'watch/js/plyr.min.js' %}"></script>
+	<script src="{% static 'watch/js/jquery.morelines.min.js' %}"></script>
+	<script src="{% static 'watch/js/photoswipe.min.js' %}"></script>
+	<script src="{% static 'watch/js/photoswipe-ui-default.min.js' %}"></script>
+	<script src="{% static 'watch/js/main.js' %}"></script>
+</body>
+
+</html>

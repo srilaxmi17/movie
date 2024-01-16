@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+	<!-- Font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CUbuntu:300,400,500,700" rel="stylesheet"> 
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="{% static 'watch/css/bootstrap-grid.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/bootstrap-reboot.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/jquery.mCustomScrollbar.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/nouislider.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/ionicons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/plyr.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/photoswipe.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/default-skin.css' %}">
+	<link rel="stylesheet" href="{% static 'watch/css/main.css' %}">
+
+	<!-- Favicons -->
+	<link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
+	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="icon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="icon/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="icon/apple-touch-icon-144x144.png">
+
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="Dmitry Volkov">
+	<title>FlixGo – Online Movies, TV Shows & Cinema HTML Template</title>
+	<style>
+        .stars {
+            unicode-bidi: bidi-override;
+            direction: ltr;
+            text-align: center;
+        }
+        .star {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+        .star:hover,
+        .star.active {
+            color: orange;
+        }
+    </style>
+
+</head>
+<body class="body">
+	
+	<!-- header -->
+	<header class="header">
+		<div class="header__wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="header__content">
+							<!-- header logo -->
+							<!-- <a href="index.html" class="header__logo">
+								<img src="img/logo.svg" alt="">
+							</a> -->
+							<!-- end header logo -->
+
+							<!-- header nav -->
+							<ul class="header__nav">
+								<!-- dropdown -->
+								<li class="header__nav-item">
+									<a href="{% url 'index' %}" class="header__nav-link">Home</a>
+								</li>
+								<!-- <li class="header__nav-item">
+									<a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuCatalog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+									<ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuCatalog">
+										{% for i in category %}
+										<li><a href="{% url 'select' i.id %}">{{i.Category}}</a></li>
+										{% endfor %}
+									</ul>
+								</li> -->
+								<!-- end dropdown -->
+								
+								<!-- end dropdown -->
+
+								<li class="header__nav-item">
+									<a href="{% url 'trailer' %}" class="header__nav-link">Trailers</a>
+								</li>
+
+								<li class="header__nav-item">
+									<a href="{% url 'about' %}" class="header__nav-link">About</a>
+								</li>
+
+								<li class="header__nav-item">
+									<a href="{% url 'contact' %}" class="header__nav-link">Contact</a>
+								</li>
+
+								
+
+							</ul>
+							<!-- end header nav -->
+
+							<!-- header auth -->
+							<div class="header__auth">
+								<button class="header__search-btn" type="button">
+									<i class="icon ion-ios-search"></i>
+								</button>
+
+								<a href="{% url 'logout' %}" class="header__sign-in">
+									<i class="icon ion-ios-log-in"></i>
+									<span>Logout</span>
+								</a>
+							</div>
+							<!-- end header auth -->
+
+							<!-- header menu btn -->
+							<button class="header__btn" type="button">
+								<span></span>
+								<span></span>
+								<span></span>
+							</button>
+							<!-- end header menu btn -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- header search -->
+		<form action="#" class="header__search">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="header__search-content">
+							<input type="text" placeholder="Search for a movie, TV Series that you are looking for">
+
+							<button type="button">search</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- end header search -->
+	</header>
+	<!-- end header -->
+
+	<!-- end content -->
+<!-- page title -->
+<section class="section section--first section--bg" data-bg="img/section/section.jpg">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="section__wrap">
+					<!-- section title -->
+					<h2 class="section__title">Pricing</h2>
+					<!-- end section title -->
+
+					<!-- breadcrumb -->
+					<!-- <ul class="breadcrumb">
+						<li class="breadcrumb__item"><a href="#">Home</a></li>
+						<li class="breadcrumb__item breadcrumb__item--active">Pricing</li>
+					</ul> -->
+					<!-- end breadcrumb -->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end page title -->
+
+<!-- pricing -->
+<div class="section">
+	<div class="container">
+		<div class="row">
+			<!-- plan features -->
+			<div class="col-12">
+				<ul class="row plan-features">
+					<li class="col-12 col-md-6 col-lg-4">1 month unlimited access!</li>
+					<li class="col-12 col-md-6 col-lg-4">Stream on your phone, laptop, tablet or TV.</li>
+					<li class="col-12 col-md-6 col-lg-4">1 month unlimited access!</li>
+					<li class="col-12 col-md-6 col-lg-4">Thousands of TV shows, movies & more.</li>
+					<li class="col-12 col-md-6 col-lg-4">You can even Download & watch offline.</li>
+					<li class="col-12 col-md-6 col-lg-4">Thousands of TV shows, movies & more.</li>
+				</ul>
+			</div>
+			<!-- end plan features -->
+
+			<!-- price -->
+			{% for i in subscription %}
+			<div class="col-12 col-md-6 col-lg-4">
+			
+				<div class="price">
+					<div class="price__item price__item--first"><span>{{i.plan}}</span> <span>${{i.amount}}</span></div>
+					<div class="price__item"><span>{{i.validity}}</span></div>
+					<div class="price__item"><span>{{i.resolution}}</span></div>
+					<div class="price__item"><span>{{i.availabilty}}</span></div>
+					<a href="{% url 'payment' i.id %}" class="price__btn">Choose Plan</a>
+				</div>
+				
+			</div>
+			{% endfor %}
+			<!-- end price -->
+
+	
+
+	<!-- Root element of PhotoSwipe. Must have class pswp. -->
+	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+		<!-- Background of PhotoSwipe. 
+		It's a separate element, as animating opacity is faster than rgba(). -->
+		<div class="pswp__bg"></div>
+
+		<!-- Slides wrapper with overflow:hidden. -->
+		<div class="pswp__scroll-wrap">
+
+			<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+			<!-- don't modify these 3 pswp__item elements, data is added later on. -->
+			<div class="pswp__container">
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+			</div>
+
+			<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+			<div class="pswp__ui pswp__ui--hidden">
+
+				<div class="pswp__top-bar">
+
+					<!--  Controls are self-explanatory. Order can be changed. -->
+
+					<div class="pswp__counter"></div>
+
+					<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+					<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+					<!-- Preloader -->
+					<div class="pswp__preloader">
+						<div class="pswp__preloader__icn">
+							<div class="pswp__preloader__cut">
+								<div class="pswp__preloader__donut"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+				<div class="pswp__caption">
+					<div class="pswp__caption__center"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- JS -->
+	<script src="{% static 'watch/js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'watch/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'watch/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'watch/js/jquery.mousewheel.min.js' %}"></script>
+	<script src="{% static 'watch/js/jquery.mCustomScrollbar.min.js' %}"></script>
+	<script src="{% static 'watch/js/wNumb.js' %}"></script>
+	<script src="{% static 'watch/js/nouislider.min.js' %}"></script>
+	<script src="{% static 'watch/js/plyr.min.js' %}"></script>
+	<script src="{% static 'watch/js/jquery.morelines.min.js' %}"></script>
+	<script src="{% static 'watch/js/photoswipe.min.js' %}"></script>
+	<script src="{% static 'watch/js/photoswipe-ui-default.min.js' %}"></script>
+	<script src="{% static 'watch/js/main.js' %}"></script>
+</body>
+
+</html>

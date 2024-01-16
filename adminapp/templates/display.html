@@ -1,0 +1,145 @@
+{% extends 'admindex.html' %}
+<!-- Sidebar End -->
+{% block content %}
+{% load static %}
+{% block nav %}
+<div class="sidebar pe-4 pb-3">
+    <nav class="navbar bg-secondary navbar-dark">
+        <a href="{% url 'admindex' %}" class="navbar-brand mx-4 mb-3">
+            <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+        </a>
+        <div class="d-flex align-items-center ms-4 mb-4">
+            <div class="position-relative">
+                <img class="rounded-circle" src="{% static 'admin/img/user.jpg' %}" alt="" style="width: 40px; height: 40px;">
+                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+            </div>
+            <div class="ms-3">
+                <h6 class="mb-0">John Doe</h6>
+                <span>Admin</span>
+            </div>
+        </div>
+            <div class="navbar-nav w-100">
+             <a href="{% url 'admindex' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            <a href="{% url 'message' %}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Message</a>
+            <a href="{% url 'u_payment' %}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Payment</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Forms</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{% url 'plan' %}" class="dropdown-item">Plan</a>
+                    <a href="{% url 'category_form' %}" class="dropdown-item">Add Category</a>
+                    <a href="{% url 'cast' %}" class="dropdown-item">Add Cast</a>
+                    <a href="{% url 'movies_form' %}" class="dropdown-item">Add Movies</a>
+                    <a href="{% url 'display' %}" class="dropdown-item active">Movie Details</a>
+                    <a href="{% url 'notification' %}" class="dropdown-item">Add Notification</a>
+                </div>
+            </div>
+            <a href="{% url 'user' %}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Users</a>
+            <!-- <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a> -->
+            
+        </div>
+        </nav>
+</div>
+{% endblock %}
+
+            <!-- Navbar End -->
+                    <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">          
+                            <div class="col-12">
+                        <div class="bg-secondary rounded" style="height: 400px; overflow-y: auto; padding: 1rem;">
+                            <h6 class="mb-4">Movie details</h6>
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Movie_name</th>
+                                        <th scope="col">Movie_year</th>
+                                        <th scope="col">Movie_image</th>
+                                        <!-- <th scope="col">Movie_cast</th> -->
+                                        <th scope="col">Movie_director</th>
+                                        <th scope="col">Movie_trailer</th>
+                                        <th scope="col">Movie_file</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                {% for i in movies %}
+                                
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">{{i.Category}}</th>
+                                        <td>{{i.Movie_name}}</td>
+                                        <td>{{i.Movie_year}}</td>
+                                        <td>{{i.Movie_image}}</td>
+                                        <!-- <td>{{i.cast_name}}</td> -->
+                                        <td>{{i.Movie_director}}</td>
+                                        <td>{{i.Movie_trailer}}</td>
+                                        <td>{{i.Movie_file}}</td>
+                                        <td><a href="{% url 'edit' i.id %}"><button>Edit</button></a></td>
+                                        <td><a href="{% url 'delete' i.id %}"><button>Delete</button></a></td>
+                                    </tr>
+                                    
+                                </tbody>
+                                
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Responsive Table</h6>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Country</th>
+                                            <th scope="col">ZIP</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>John</td>
+                                            <td>Doe</td>
+                                            <td>jhon@email.com</td>
+                                            <td>USA</td>
+                                            <td>123</td>
+                                            <td>Member</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>mark@email.com</td>
+                                            <td>UK</td>
+                                            <td>456</td>
+                                            <td>Member</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>jacob@email.com</td>
+                                            <td>AU</td>
+                                            <td>789</td>
+                                            <td>Member</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- Table End -->
+
+    
+{% endblock %}

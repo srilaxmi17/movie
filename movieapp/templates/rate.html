@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Star Rating</title>
+    <style>
+        /* Your CSS styles here */
+        .stars {
+            unicode-bidi: bidi-override;
+            direction: ltr; /* Change direction to left-to-right */
+            text-align: center;
+        }
+        .star {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+        .star:hover,
+        .star.active {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your HTML content -->
+    <div class="rating">
+        <div class="stars" data-rating="3.5">
+            <!-- Stars in reverse order -->
+            <span class="star" data-value="5">&#9733;</span>
+            <span class="star" data-value="4.5">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="3.5">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+        </div>
+        <input type="hidden" name="rating" id="rating-value" value="0">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const stars = document.querySelectorAll('.star');
+            const ratingValue = document.getElementById('rating-value');
+
+            stars.forEach(star => {
+                star.addEventListener('click', function () {
+                    const value = this.getAttribute('data-value');
+                    ratingValue.value = value;
+                    highlightStars(value);
+                });
+            });
+
+            function highlightStars(value) {
+                stars.forEach(star => {
+                    if (parseFloat(star.getAttribute('data-value')) <= parseFloat(value)) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
+
+            const initialRating = document.querySelector('.stars').getAttribute('data-rating');
+            highlightStars(initialRating);
+        });
+    </script>
+</body>
+</html>
+

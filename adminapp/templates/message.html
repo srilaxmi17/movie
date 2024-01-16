@@ -1,0 +1,151 @@
+{% extends 'admindex.html' %}
+{% block nav %}
+{% load static %}
+<!-- Sidebar Start -->
+<div class="sidebar pe-4 pb-3">
+    <nav class="navbar bg-secondary navbar-dark">
+        <a href="index.html" class="navbar-brand mx-4 mb-3">
+            <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+        </a>
+        <div class="d-flex align-items-center ms-4 mb-4">
+            <div class="position-relative">
+                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+            </div>
+            <div class="ms-3">
+                <h6 class="mb-0">Jhon Doe</h6>
+                <span>Admin</span>
+            </div>
+        </div>
+        <div class="navbar-nav w-100">
+            <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            <div class="nav-item dropdown">
+                <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="button.html" class="dropdown-item">Buttons</a>
+                    <a href="typography.html" class="dropdown-item">Typography</a>
+                    <a href="element.html" class="dropdown-item">Other Elements</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+ <div class="sidebar pe-4 pb-3">
+    <nav class="navbar bg-secondary navbar-dark">
+        <a href="{% url 'admindex' %}" class="navbar-brand mx-4 mb-3">
+            <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+        </a>
+        <div class="d-flex align-items-center ms-4 mb-4">
+            <div class="position-relative">
+                <img class="rounded-circle" src="{% static 'admin/img/user.jpg' %}" alt="" style="width: 40px; height: 40px;">
+                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+            </div>
+            <div class="ms-3">
+                <h6 class="mb-0">John Doe</h6>
+                <span>Admin</span>
+            </div>
+        </div>
+        
+        <div class="navbar-nav w-100">
+            <a href="{% url 'admindex' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+           <a href="{% url 'message' %}" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Message</a>
+           <a href="{% url 'u_payment' %}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Payment</a>
+           <div class="nav-item dropdown">
+               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Forms</a>
+               <div class="dropdown-menu bg-transparent border-0">
+                <a href="{% url 'plan' %}" class="dropdown-item">Plan</a>
+                <a href="{% url 'category_form' %}" class="dropdown-item">Add Category</a>
+                   <a href="{% url 'cast' %}" class="dropdown-item">Add Cast</a>
+                   <a href="{% url 'movies_form' %}" class="dropdown-item">Add Movies</a>
+                   <a href="{% url 'display' %}" class="dropdown-item">Movie Details</a>
+                   <a href="{% url 'notification' %}" class="dropdown-item">Add Notification</a>
+               </div>
+           </div>
+            <a href="{% url 'user' %}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Users</a>
+                
+            </div>
+            </div>
+    </nav>
+</div> 
+{% endblock %}
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+            <div class="col-sm-12 col-6 col-4">
+
+        <!-- <div class="col-sm-12 col-md-6 col-xl-4"> -->
+            <div class="h-100 bg-secondary rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h6 class="mb-0">Messages</h6>
+                    <a href="">Show All</a>
+                </div>
+                {% for i in feedback %}
+                <div class="d-flex align-items-center border-bottom py-3">
+                    <!-- <img class="rounded-circle flex-shrink-0" src="{% static 'admin/img/user.jpg' %}" alt="" style="width: 40px; height: 40px;"> -->
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <img class="rounded-circle flex-shrink-0" src="{% static 'admin/img/user.jpg' %}" alt="" style="width: 40px; height: 40px;">
+                            <div class="flex-grow-1 ms-3">
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-0">{{i.u_name}}</h6>
+                                    <small>{{i.date}}, {{i.time}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="d-flex w-100 justify-content-between">
+                           <span><h6>Subject:</h6> <p>{{i.add_subject}}</p></span> 
+                        </div>
+                         <span><h6>Message: </h6><p>{{i.add_message}}</p></span>
+                    </div>
+                </div>
+                       {% endfor %}         
+                
+            </div>
+        </div>
+        <!-- <div class="col-sm-12 col-6 col-4">
+            <div class="h-100 bg-secondary rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Calender</h6>
+                    <a href="">Show All</a>
+                </div>
+                <div id="calender"></div>
+            </div>
+        </div> -->
+
+    </div>
+</div>
+<!-- 
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Testimonial</h6>
+                            <div class="owl-carousel testimonial-carousel">
+                                <div class="testimonial-item text-center">
+                                    <img class="img-fluid rounded-circle mx-auto mb-4" src="{% static 'admin/img/testimonial-1.jpg' %}" style="width: 100px; height: 100px;">
+                                    <h5 class="mb-1">Client Name</h5>
+                                    <p>Profession</p>
+                                    <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                                </div>
+                                <div class="testimonial-item text-center">
+                                    <img class="img-fluid rounded-circle mx-auto mb-4" src="{% static 'admin/img/testimonial-2.jpg' %}" style="width: 100px; height: 100px;">
+                                    <h5 class="mb-1">Client Name</h5>
+                                    <p>Profession</p>
+                                    <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <iframe class="position-relative rounded w-100 h-100"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                            frameborder="0" allowfullscreen="" aria-hidden="false"
+                            tabindex="0" style="filter: grayscale(100%) invert(92%) contrast(83%); border: 0;"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- Widget End -->
+            <!-- Footer End -->
+
+{% endblock %}
